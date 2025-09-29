@@ -4,9 +4,15 @@
 // 1. Pre-filled tasks + LocalStorage
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [
    { id: 1, name: "Call supplier", date: "2025-09-29", completed: false },
-    id: 2, name: "Prepare invoice", date: "2025-09-30", completed: false },
-  { id: 3, name: "Schedule delivery", date: "2025-10-01", completed: true },
-  { id: 4, name: "Check stock", date: "2025-10-02", completed: false },
+   { id: 2, name: "Prepare invoice", date: "2025-09-30", completed: false },
+   { id: 3, name: "Schedule delivery", date: "2025-10-01", completed: true },
+   { id: 4, name: "Check stock", date: "2025-10-02", completed: false },
+   { id: 5, name: "Send email report", date: "2025-10-03", completed: false },
+  { id: 6, name: "Update website", date: "2025-10-04", completed: false },
+  { id: 7, name: "Team meeting", date: "2025-10-05", completed: true },
+  { id: 8, name: "Backup database", date: "2025-10-06", completed: false },
+  { id: 9, name: "Order office supplies", date: "2025-10-07", completed: false },
+  { id: 10, name: "Prepare presentation", date: "2025-10-08", completed: false },
 ];
 
 // 2. DOM elements
