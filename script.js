@@ -97,22 +97,42 @@ saveTasks();
 }
   // switch completed true/false
   // save + render
-}
+
 
 // 7. Edit task
 function editTask(id) {
+    const task = tasks.find(t => t.id === id);
+    const newName = prompt("Edit task name:", task.name);
+    const newDate = prompt("Edit due date (YYYY-MM-DD):", task.date);
+    if (newName && newName.trim() !== "") task.name = newName.trim();
+    else alert("Task name cannot be empty. Keeping previous name.");
+
+    if (newDate && !isNaN(new Date(newDate))) task.date = newDate;
+  else alert("Invalid or empty date. Keeping previous date.");
+
+  saveTasks();
+  renderTasks();
+}
+
+
+
   // find task by id
   // prompt new name + new date
   // validate → update values
-  // save + render
-}
+  // save + renderconst task = tasks.find(t => t.id === id)
 
 // 8. Delete task
-function deleteTask(id) {
+function deleteTask(id){
+  if (confirm("Are you sure you want to delete this task?"))
+    tasks = tasks.filter(t => t.id !== id);
+    saveTasks();
+    renderTasks();
+  }
+
   // confirm before delete
   // filter tasks array
   // save + render
-}
+
 
 // 9. Set filter
 function setFilter(filter) {
