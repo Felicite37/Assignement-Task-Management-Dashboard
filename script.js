@@ -15,7 +15,7 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [
   { id: 10, name: "Prepare presentation", date: "2025-10-08", completed: false },
 ];
 
-// 2. DOM elements
+//  2. DOM elements
 const taskList = document.getElementById("taskList");
 const taskForm = document.getElementById("taskForm");
 const taskName = document.getElementById("taskName");
@@ -24,14 +24,44 @@ const taskDate = document.getElementById("taskDate");
 let currentFilter = "all";
 
 // 3. Save tasks to LocalStorage
-function saveTasks() { ... }
+function saveTasks() { localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 // 4. Render tasks with filter
 function renderTasks() {
-  // clear old list
-  // filter tasks (all, pending, completed)
-  // if no tasks → show message
-  // loop through tasks → build <li> with buttons (Done, Edit, Delete)
+    taskList.innerHTML = "";
+    let filteredTasks = tasks;
+     if (currentFilter === "pending") filteredTasks = tasks.filter(t => !t.completed);
+
+else if (currentFilter === "completed") filteredTasks = tasks.filter(t => t.completed);
+
+if (filteredTasks.length === 0) {
+  taskList.innerHTML = `<p class="text-gray-500 text-center">No tasks available.</p>`;
+  return;
+}
+
+filteredTasks.forEach(task => {
+    const li = document.createElement("li");
+    li.className = "flex justify-between items-center bg-gray-50 p-3 rounded-lg shadow";
+
+    li.innerHTML = `
+    <div>
+        <h3 class="font-medium ${task.completed ? "line-through text-gray-500" : ""}">
+          ${task.name}
+        </h3>
+        <p class="text-sm text-gray-500">Due: ${task.date}</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="toggleTask(${task.id})" 
+          class="px-2 py-1 ${task.completed ? "bg-gray-500" : "bg-green-500"} text-white rounded">
+          ${task.completed ? "Undo" : "Done"}
+        </button>
+        <button onclick="editTask(${task.id})" class="px-2 py-1 bg-yellow-500 text-white rounded">Edit</button>
+        <button onclick="deleteTask(${task.id})" class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
+      </div>
+    `;
+    taskList.appendChild(li);
+  });
 }
 
 // 5. Add new task (form submit)
