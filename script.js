@@ -91,6 +91,10 @@ const newTask = {
 
 // 6. Toggle complete
 function toggleTask(id) {
+    tasks = tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
+saveTasks();
+  renderTasks();
+}
   // switch completed true/false
   // save + render
 }
