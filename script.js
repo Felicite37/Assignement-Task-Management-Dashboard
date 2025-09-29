@@ -136,9 +136,12 @@ function deleteTask(id){
 
 // 9. Set filter
 function setFilter(filter) {
-  // update currentFilter
-  // render again
+    currentFilter = filter;
+  renderTasks();
 }
+
+currentFilter = filter;
+  renderTasks();
 
 // 10. Initial render
 renderTasks();
