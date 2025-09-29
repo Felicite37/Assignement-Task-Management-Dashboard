@@ -66,11 +66,28 @@ filteredTasks.forEach(task => {
 
 // 5. Add new task (form submit)
 taskForm.addEventListener("submit", e => {
+    e.preventDefault();
+if (taskName.value.trim() === "" || taskDate.value === "") {
+  alert("Task name and due date are required!");
+  return;
+}
+const newTask = {
+  id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+  name: taskName.value.trim(),
+  date: taskDate.value,
+  completed: false,
+};
+ tasks.push(newTask);
+  saveTasks();
+  renderTasks();
+  taskForm.reset();
+});
+    
   // prevent reload
   // validate inputs
   // create new task object
   // push to array, save, render
-});
+;
 
 // 6. Toggle complete
 function toggleTask(id) {
